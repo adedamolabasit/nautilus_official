@@ -1,0 +1,61 @@
+<div>
+  <div class="submit-project-wrapper">
+    <div class="w-form">
+      <form method="POST">
+        <div class="w-row">
+          <div class="w-col w-col-6">
+            {% if current_user.is_authenticated %}
+          {% else %}
+            <div><label for="Name" class="field-label">Full name</label><input type="text" class="text-field white w-input" maxlength="256" name="Name" data-name="Name" placeholder="Enter your name" id="Name" required="required"></div>
+          </div>
+          <div class="w-col w-col-6">
+            <div><label for="Email" class="field-label">Email address</label><input type="email" class="text-field white w-input" maxlength="256" name="Email" data-name="Email" placeholder="Enter your email" id="Email" required="required"></div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="top-margin _15px">
+          <div class="w-row">
+            <div class="w-col w-col-6">
+              <div><label for="Timeline" class="field-label">Timeline</label><input type="text" class="text-field white w-input" maxlength="256" name="Timeline" data-name="Timeline" placeholder="Timeline" id="Timeline" ></div>
+            </div>
+            <div class="w-col w-col-6">
+              <div><label for="Budget" class="field-label">Budget</label><input type="text" class="text-field white w-input" maxlength="256" name="Budget" data-name="Budget" placeholder="Enter your budget" id="Budget" ></div>
+            </div>
+          </div>
+        </div>
+        <div class="top-margin _15px"><label for="Timeline" class="field-label">I need help with...</label>
+          <div class='grid-radio'>
+            <div class="form-check form-check-inline">
+              <img src="static/nautilus/images/icons8-pen-512-p-130x130q80.png"  width="50" sizes="50px" alt="" >
+              <label class="form-check-label" for="inlineCheckbox1">WEB Design</label>
+              <input class="form-check-input" type="checkbox" value="Web design" name="help1">
+          
+            </div>
+            <div class="form-check form-check-inline">
+              <img src="static/nautilus/images/icons8-device-shop-512-p-130x130q80.png"  width="50" sizes="50px" alt="" >
+              <label class="form-check-label" for="inlineCheckbox1">Ecommerce</label>
+              <input class="form-check-input" type="checkbox" value="Ecommerce" name="help2">
+            
+            </div>
+            <div class="form-check form-check-inline">
+              <img src="static/nautilus/images/icons8-source-code-512-1-p-130x130q80.png"  width="50" sizes="50px" alt="" >
+              <label class="form-check-label" for="inlineCheckbox1">Development</label>
+              <input class="form-check-input" type="checkbox" value="Development" name="help3">
+          
+            </div>
+            <div class="form-check form-check-inline">
+              <img src="static/nautilus/images/icons8-diamond-care-512_1.png"  width="50" sizes="50px" alt="" >
+  
+              <label class="form-check-label" for="inlineCheckbox1">Everything</label>
+              <input class="form-check-input" type="checkbox" value='Everything' name="help4" >
+            </div>
+           
+          </div>
+        </div>
+        <div class="top-margin _15px"><label for="Timeline" class="field-label">More information</label>
+          <div><textarea id="Text-Area" name="Text-Area" placeholder="Enter your message" maxlength="5000" required="required" data-name="Text Area" class="text-field area white w-input"></textarea></div>
+        </div>
+        <div class="top-margin">
+          <div class="algin-center"><input type="submit" value="Submit Project" data-wait="Please wait..." class="button w-button"></div>
+        </div>
+      </form>

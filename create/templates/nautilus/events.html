@@ -1,0 +1,88 @@
+{% extends 'nautilus/index.html' %}
+{% block content %}
+<style>
+    
+        body {
+            text-align:center;
+        } 
+        .imgs {
+            width:400px;
+            height:200px;
+        }
+    
+</style>
+
+<div class="section gray top-right">
+  <div class="container w-container">
+    <div>
+      <div class="top-title">
+        <div class="divider-title"></div>
+        <h1 class="top-title-font">Events</h1>
+      </div>
+      <h4 class="my-5">Upcoming Events</h4>
+
+      <div>
+        <div class="w-dyn-list">
+          {% for events in upcoming_events %}
+           <div role="list" class="w-dyn-items w-row">
+              <div role="listitem" class="project-item w-dyn-item w-col w-col-3">
+                 <a data-w-id="2ebdc30f-8bf5-7bbc-dade-86cc4cfa47ec" href="events/{{ events.id }}" class="project-wrapper-second w-inline-block">
+                    <div class="project-image">
+                       <img class="imgs" src="{{ url_for('static',filename='uploads/' + events.image ) }}" alt="" sizes="100vw" >
+                       <div class="gradient-overlay darker" style="opacity: 0;"></div>
+                       <div class="category absolute">{{ events.date }}</div>
+                    </div>
+                    <div class="project-content">
+                       <h3 class="project-title dark">{{ events.programe}}</h3>
+                       <div class="product-circle-wrapper in-project"></div>
+                    </div>
+                 </a>
+              </div>
+            {% endfor %}
+            </div>
+            <p>.</p>
+            <p>.</p>
+            <p>.</p>
+            <p>.</p>
+<h4>Past Events</h4>
+      <div>
+        <div class="w-dyn-list">
+          {% for events in past_events %}
+           <div role="list" class="w-dyn-items w-row">
+              <div role="listitem" class="project-item w-dyn-item w-col w-col-3">
+                 <a data-w-id="2ebdc30f-8bf5-7bbc-dade-86cc4cfa47ec" href="/events/{{ events.id }}" class="project-wrapper-second w-inline-block">
+                    <div class="project-image">
+                     <img class="imgs" src="{{ url_for('static',filename='uploads/' + events.image ) }}" alt="" sizes="100vw" >
+                       
+                       <div class="gradient-overlay darker" style="opacity: 0;"></div>
+                       <div class="category absolute">{{ events.date }}</div>
+                    </div>
+                    <div class="project-content">
+                       <h3 class="project-title dark">{{ events.programe}}</h3>
+                       <div class="product-circle-wrapper in-project"></div>
+                    </div>
+                 </a>
+              </div>
+            {% endfor %}
+      
+              <!-- akdab -->
+            
+           </div>
+        </div>
+     </div>
+
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+    <p>.</p>
+
+
+
+
+
+{% endblock %}

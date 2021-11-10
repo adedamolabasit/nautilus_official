@@ -1,0 +1,85 @@
+{% extends 'nautilus/index.html' %}
+{% block content2 %}
+
+<style>
+    				                
+body{margin-top:20px;}
+.avatar{
+width:200px;
+height:200px;
+}				              
+</style>
+<p>.</p>
+<p>.</p>
+
+<body>
+  
+    <div class="row row-cols-2">
+    <div class="col">
+      
+
+    <div class="container bootstrap snippets bootdey">
+        <h1 class="text-primary">Edit Profile</h1>
+          <hr>
+        <div class="row">
+          
+          <!-- left column -->
+          <div class="col-md-3">
+            <div class="text-center">
+              <img src="{{ url_for('static',filename='profile_pics/' + image_file  )}}" class="avatar img-circle img-thumbnail" alt="avatar" ">
+              <h6>Upload a different photo...</h6>
+              
+    
+            </div>
+          </div>
+        {% if current_user.newsletter == True %}
+        <p>you have access to our events </p>
+        {% endif %}
+          <!-- edit form column -->
+          {% if form.errors %}
+          <div class="col-md-9 personal-info">
+            <div class="alert alert-info alert-dismissable">
+              <a class="panel-close close" data-dismiss="alert">×</a> 
+              <i class="fa fa-coffee"></i>
+              <strong>.{{ form.errors }}. </strong>
+            </div>
+        {% endif %}
+            <h3>Personal info</h3>
+            
+            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.picture }}
+              <div class="form-group">
+                <div class="col-lg-8">
+                    {{ form.username }}
+                
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-8">
+                    {{ form.email }}
+                
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-8">
+                    {{ form.submit }}
+                
+       
+   
+ <hr>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+</div>
+<!-- end first column -->
+
+
+
+<!-- end second column 
+</div>
+</div>
+</body>
+ {% endblock %}
