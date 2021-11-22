@@ -23,10 +23,7 @@ class User(db.Model,UserMixin):
     
     def get_reset_token(self,expires_sec=1200):
         s=Serializer(app.config['SECRET_KEY'],expires_sec)
-        return s.dumps({'user_id':self.id}).decode('utf-8')
-
-
-   
+        return s.dumps({'user_id':self.id}).decode('utf-8')  
     @staticmethod
     def verify_reset_token(token):
         s=Serializer(app.config['SECRET_KEY'])
@@ -35,17 +32,18 @@ class User(db.Model,UserMixin):
         except:
             return None
         return User.query.get(user_id)
+
     def get_verify_email_token(self,expires_sec=1200):
         s=Serializer(app.config['SECRET_KEY'],expires_sec)
-        return s.dumps({'email':self.email}).decode('utf-8')
+        return s.dumps({'email':self.id}).decode('utf-8')
     @staticmethod
     def verify_email_token(token):
         s=Serializer(app.config['SECRET_KEY'])
         try:  
-            email = s.loads(token)['email']
+            user_id = s.loads(token)['user_id']
         except:
             return None
-        return User.query.get(email)
+        return User.query.get(user_id)
 
 class Newsletter(db.Model):
     __tablename__='newsletter'
@@ -55,30 +53,53 @@ class Newsletter(db.Model):
 
 
 
-# class Post(db.Model):
-#     id=db.Column(db.Integer,primary_key=True)
-#     title=db.Column(db.String(112),nullable=True)
-#     date_posted=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
-#     content=db.Column(db.Text,nullable=True)
-#     user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+class Post(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    title=db.Column(db.String(112),nullable=True)
+    date_posted=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+    content=db.Column(db.Text,nullable=True)
+    user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
 
-# class Event(db.Model):
-#     __tablename__='Event'
-#     __table_args__ = {'extend_existing': True}
 
-#     id =db.Column(db.Integer,primary_key=True)
-#     programe=db.Column(db.String(4577),nullable=False)
-#     information=db.Column(db.Text,nullable=True)
-#     uploaded=db.Column(db.DateTime())
-#     date=db.Column(db.DateTime())
-#     ends=db.Column(db.String(54))
-#     image=db.Column(db.Text,nullable=False)
-#     name=db.Column(db.Text,nullable=True)
-#     address=db.Column(db.Text,nullable=True)
-#     mimetype=db.Column(db.Text,nullable=False)
-#     uploaad=db.relationship('Images',cascade='all,delete' ,backref='event', lazy=True)
 
+class Event(db.Model):
+    __tablename__='Event'
+    __table_args__ = {'extend_existing': True}
+
+    id =db.Column(db.Integer,primary_key=True)
+    programe=db.Column(db.String(4577),nullable=False)
+    information=db.Column(db.Text,nullable=True)
+    host=db.Column(db.String(35),nullable=True)
+    uploaded=db.Column(db.DateTime(),default=datetime.now())
+    date=db.Column(db.DateTime())
+    ends=db.Column(db.String(54))
+    image=db.Column(db.Text,nullable=False)
+    name=db.Column(db.Text,nullable=True)
+    address=db.Column(db.Text,nullable=True)
+    mimetype=db.Column(db.Text,nullable=False)
+    upload=db.relationship('Images',cascade='all,delete' ,backref='event', lazy=True)
+
+
+    
+
+
+class Images(db.Model):
+    __tablename__='image'
+    __table_args__ = {'extend_existing': True}
+
+    id=db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String(333),nullable=False)
+    discipline=db.Column(db.String(213),nullable=False)
+    speaker=db.Column(db.String(163),nullable=True)
+    facebook_link=db.Column(db.Text,nullable=True)
+    instagram_link=db.Column(db.Text,nullable=True)
+    link=db.Column(db.Text,nullable=True)
+    img=db.Column(db.Text,nullable=False)
+    names=db.Column(db.Text,nullable=False)
+    mimetypes=db.Column(db.Text,nullable=False)
+    event_id=db.Column(db.Integer, db.ForeignKey('Event.id'), nullable=True)   
+    
 
 
 

@@ -1,0 +1,71 @@
+{% extends 'naut/signup.html' %}
+{% block content %}
+
+<section class="event_schedule_area sec_pad">
+    <div class="container">
+        <div class="hosting_title security_title text-center">
+            <h2 class="wow fadeInUp" data-wow-delay="0.2s"><span>Schedule</span>Conference Schedule</h2>
+        </div>
+        <div class="event_schedule_inner">
+            <ul class="nav nav-tabs event_tab" role="tablist">
+                <li class="nav-item wow fadeInUp" data-wow-delay="0.4s">
+                    <a class="nav-link active" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="true">
+                        <h5>Events<span>{{ total_counts }}</span></h5>
+                    </a>
+                </li>
+                <li class="nav-item wow fadeInUp" data-wow-delay="0.6s">
+                    <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">
+                        <h5>Coming Events<span>{{ upcoming_count }} lined up </span></h5>
+                    </a>
+                </li>
+                <li class="nav-item wow fadeInUp" data-wow-delay="0.8s">
+                    <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="three" aria-selected="false">
+                        <h5>Past Events<span>{{ past_count }} lined up</span></h5>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content event_tab_content">
+                Upcoming Events
+                {% for events in upcoming_events%}
+                <div class="tab-pane fade show active" id="two" role="tabpanel" aria-labelledby="two-tab">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="img/home-event/conference.jpg" alt="">
+                            <a href=""><i class="icon_clock_alt"></i>{{ events.date }} - {{ events.end }}</a>
+                            <a href=""><i class="icon_pin_alt"></i>{{ events.address }}</a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="h_head">{{ events.programme }}</h3>
+                            <span>by <a href="#">{{ events.host }}</a></span>                           
+                            <a href="events/{{ events.id }}">                        
+                            <p>{{ events.information }}</p>
+                        </a>
+                        </div>
+                    </div>
+                    {% endfor %}   
+                                    
+                {% for events in past_events%}
+                Past Events
+                <div class="tab-pane fade show active" id="three" role="tabpanel" aria-labelledby="three-tab">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="img/home-event/conference.jpg" alt="">
+                            <a href="#"><i class="icon_clock_alt"></i>{{ events.date }} - {{ events.end }}</a>
+                            <a href="#"><i class="icon_pin_alt"></i>{{ events.address }}</a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="h_head">{{ events.programme }}</h3>
+                            <span>by <a href="#">{{ events.host }}</a></span>                           
+                            <p>{{ events.information }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}   
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

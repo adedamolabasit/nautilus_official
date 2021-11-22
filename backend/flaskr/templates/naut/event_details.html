@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from droitthemes.com/html/saasland/sign-up-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Apr 2020 18:05:24 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../static/naut/img/favicon.png" type="image/x-icon">
+    <title>Saasland</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/naut/css/bootstrap.min.css">
+    <!--icon font css-->
+    <link rel="stylesheet" href="../static/naut/vendors/themify-icon/themify-icons.css">
+    <link rel="stylesheet" href="../static/naut/vendors/elagent/style.css">
+    <link rel="stylesheet" href="../static/naut/vendors/flaticon/flaticon.css">
+    <link rel="stylesheet" href="../static/naut/vendors/animation/animate.css">
+    <link rel="stylesheet" href="../static/naut/vendors/owl-carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/naut/vendors/magnify-pop/magnific-popup.css">
+    <link rel="stylesheet" href="../static/naut/vendors/scroll/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../static/naut/css/style.css">
+    <link rel="stylesheet" href="../static/naut/css/responsive.css">
+</head>
+<style>
+    .img {
+        height: 555px;
+        width: 555px;
+    }
+    .prof {
+        height: 200px;
+        width: 200px;
+        border-radius: 55%;
+    }
+
+</style>
+<body>
+<section class="event_about_area">
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6">
+                <div class="event_about_img">
+                    <div class="">
+                    <img class="img" data-wow-delay="" src="{{ url_for('static',filename='events/' + event.image )}}" alt="">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="event_about_content">
+                    <h2 class="wow fadeInUp">{{ event.programe }}</h2>
+                    <p class="wow fadeInUp" data-wow-delay="0.2s"> {{ event.information }}</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="event_about_item wow fadeInUp" data-wow-delay="0.2s">
+                                <img src="img/home-event/marker.png" alt="">
+                                <h6>Where</h6>
+                            <p><i class="icon_pin_alt"></i>{{ event.address }}</p>
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="event_about_item wow fadeInUp" data-wow-delay="0.4s">
+                                <img src="img/home-event/timer.png" alt="">
+                                <h6>When</h6>
+                            <p><i class="icon_clock_alt"></i> {{ event.date }} - {{ event.end }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="event_team_area sec_pad">
+    <div class="container">
+        <div class="hosting_title security_title text-center">
+            <h2 class="wow fadeInUp" data-wow-delay="0.2s"><span>Speakers</span> Who's Speaking</h2>
+        </div>
+        {% for events in event.upload %}
+        <div class="event_team_slider">
+            <div class="item">
+                <div class="e_team_img">
+                    <img class="prof" src="{{ url_for('static',filename='speakers/' + events.names )}}" alt="">
+                    <ul class="list-unstyled">
+                        <li><a href="{{ events.instagram_link }}"><i class="social_twitter"></i></a></li>
+                        <li><a href="{{ events.facebook_link }}"><i class="social_facebook"></i></a></li>
+                        <li><a href="{{ events.link }}"><i class="social_linkedin"></i></a></li>
+                    </ul>
+                </div>
+                <a href="#"><h4>{{ events.name }}</h4></a>
+                <p>{{ events.discipline }}</p>
+                <p>{{ events.speaker }}</p>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</section>
+
+<section class="sign_in_area bg_color sec_pad">
+    <div class="container">
+        <div class="sign_info">
+            <div class="row">
+                <div class="col-lg-5">
+                {% if current_user.is_admin %}
+                {{ current_user.username }} you are seeing this page cause you are the admin and you are not allowed to make unneccessary changes if you are not authorized to
+                {% endif %}
+                </div>
+                <div class="col-lg-7">
+                    <div class="login_info">
+                        <h2 class="f_p f_600 f_size_24 t_color3 mb_40">Upload The Speaker</h2>
+                        <form action="" method="POST" enctype="multipart/form-data">
+                        
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">Name</label>
+                            
+                                    <input type="text" name="name" autocomplete="off" required>
+                                  
+                            </div>
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">discipline</label>
+                            
+                                    <input type="text" name="discipline" autocomplete="off" required>
+                                  
+                            </div>
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">speaker Role</label>
+                            
+                                    <input type="text" name="speaker" autocomplete="off" required>
+                                  
+                            </div>
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">linkedin link</label>
+                            
+                                    <input type="text" name="linkedin" autocomplete="off" required>
+                                  
+                            </div>
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">facebook link</label>
+                            
+                                    <input type="text" name="facebook" autocomplete="off" required>
+                                  
+                            </div>
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">instagram link</label>
+                            
+                                    <input type="text" name="instagram" autocomplete="off" required>
+                                  
+                            </div>
+                            <div class="form-group text_box">
+                                <label class="f_p text_c f_400">speaker</label>
+                            
+                                    <input type="file" name="pic">
+                                  
+                            </div>
+                           
+                              
+                        
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="submit">submit</button>
+                                <div class="social_text d-flex ">
+                      
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="../static/naut/js/jquery-3.2.1.min.js"></script>
+<script src="../static/naut/js/propper.js"></script>
+<script src="static/naut/js/bootstrap.min.js"></script>
+<script src="static/naut/vendors/wow/wow.min.js"></script>
+<script src="static/naut/vendors/sckroller/jquery.parallax-scroll.js"></script>
+<script src="static/naut/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="static/naut/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="static/naut/vendors/isotope/isotope-min.js"></script>
+<script src="static/naut/vendors/magnify-pop/jquery.magnific-popup.min.js"></script>
+<script src="static/naut/vendors/scroll/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="static/naut/js/plugins.js"></script>
+<script src="static/naut/js/main.js"></script>
+</body>
+
+
+<!-- Mirrored from droitthemes.com/html/saasland/sign-up-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Apr 2020 18:05:24 GMT -->
+</html>

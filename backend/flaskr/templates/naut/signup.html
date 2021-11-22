@@ -24,39 +24,7 @@
 </head>
 
 <body>
-    <!-- <div id="preloader">
-        <div id="ctn-preloader" class="ctn-preloader">
-            <div class="animation-preloader">
-                <div class="spinner"></div>
-                <div class="txt-loading">
-                    <span data-text-preloader="S" class="letters-loading">
-                        S
-                    </span>
-                    <span data-text-preloader="A" class="letters-loading">
-                        A
-                    </span>
-                    <span data-text-preloader="A" class="letters-loading">
-                        A
-                    </span>
-                    <span data-text-preloader="S" class="letters-loading">
-                        S
-                    </span>
-                    <span data-text-preloader="L" class="letters-loading">
-                        L
-                    </span>
-                    <span data-text-preloader="A" class="letters-loading">
-                        A
-                    </span>
-                    <span data-text-preloader="N" class="letters-loading">
-                        N
-                    </span>
-                    <span data-text-preloader="D" class="letters-loading">
-                        D
-                    </span>
-                </div>
-                <p class="text-center">Loading</p>
-            </div>
-            <!--  -->
+   
             {% block content %}
 
           
@@ -113,7 +81,21 @@
                                         <!--//check-box-->
                                   
                                     </div>
-                                    {{ form.errors }}
+                                    {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                    {% elif form.errors %}
+                                
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ form.errors }} 
+                                      </div>
+                                    
+                                    
+                                    {% endif %}
+                                    {% endwith %}
+                        
                                     <div class="d-flex justify-content-between align-items-center">
                                         <button type="submit" class="btn_three">{{ form.submit(class='btn-submit') }}</button>
                                        

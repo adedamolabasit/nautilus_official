@@ -52,3 +52,28 @@ class ResetPasswordForm(FlaskForm):
      password=PasswordField('Password',validators=[DataRequired()],render_kw={'placeholder':'************'})   
      comfirm_password=PasswordField('Comfirlm password',validators=[DataRequired(),EqualTo('password')],render_kw={'placeholder':'************'}) 
      submit=SubmitField('Request Password')
+
+
+class UpdateAccountForm(FlaskForm):
+     username=StringField('Username',validators=[DataRequired(),length(min=4,max=21)],render_kw={'placeholder':'username'})
+   
+     email=StringField('Email',validators=[DataRequired(),Email()],render_kw={'placeholder':'Email'})
+     picture=FileField('Update Profile Picture',validators=[FileAllowed(['jpg','png','jpeg'])])
+     submit=SubmitField('Update')
+     
+     def validate_username(self,username):
+         if username.data != current_user.username:
+            existing_username=User.query.filter_by(username=username.data).first()
+            if existing_username:
+                raise ValidationError("user alrady exits please use another username")
+     
+     def validate_email(self,email):
+         if email.data != current_user.email:
+            existing_email=User.query.filter_by(email=email.data).first()
+            if existing_email:
+                raise ValidationError("The email is taken")
+         
+class PostForm(FlaskForm):
+    title=StringField('Title',validators=[DataRequired()])
+    content=TextAreaField('Content',validators=[DataRequired()])
+    submit=SubmitField('Post')
